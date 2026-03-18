@@ -1,0 +1,134 @@
+schema: '2.0'
+stages:
+  collect:
+    cmd: python src/collect.py
+    deps:
+    - path: params.yaml
+      hash: md5
+      md5: 6b80109eb196d98d696bfa2780a7d4f1
+      size: 315
+    - path: src/collect.py
+      hash: md5
+      md5: cbe4f7faf82e41de4b18e18e83fed92d
+      size: 1643
+    params:
+      params.yaml:
+        collect:
+          technopark_lat: 8.5574
+          technopark_lon: 76.88
+          thampanoor_lat: 8.4875
+          thampanoor_lon: 76.9525
+          days_history: 180
+    outs:
+    - path: data/raw/technopark.csv
+      hash: md5
+      md5: ae04e7af93bb914233c336072a5d8ca5
+      size: 161918
+    - path: data/raw/thampanoor.csv
+      hash: md5
+      md5: a888193cec7ccd0d07243fd071325c7b
+      size: 162268
+  preprocess:
+    cmd: python src/preprocess.py
+    deps:
+    - path: data/raw/technopark.csv
+      hash: md5
+      md5: ae04e7af93bb914233c336072a5d8ca5
+      size: 161918
+    - path: data/raw/thampanoor.csv
+      hash: md5
+      md5: a888193cec7ccd0d07243fd071325c7b
+      size: 162268
+    - path: params.yaml
+      hash: md5
+      md5: 6b80109eb196d98d696bfa2780a7d4f1
+      size: 315
+    - path: src/preprocess.py
+      hash: md5
+      md5: 9ea2c5057251f6f1c66ad94cbe4eda99
+      size: 1464
+    params:
+      params.yaml:
+        preprocess:
+          lookback: 48
+          horizon: 24
+          test_split: 0.2
+    outs:
+    - path: data/processed/technopark_X_test.npy
+      hash: md5
+      md5: a91ac7df7795f39c06cf1704aeb63603
+      size: 1970048
+    - path: data/processed/technopark_X_train.npy
+      hash: md5
+      md5: 4a91904143f482f1f43a297045dfb607
+      size: 7872896
+    - path: data/processed/technopark_y_test.npy
+      hash: md5
+      md5: 3c1a4d05f71af635d0567e8dd2f71141
+      size: 164288
+    - path: data/processed/technopark_y_train.npy
+      hash: md5
+      md5: 71ffc30b0d6d7dcb3f981b0189e6fc71
+      size: 656192
+    - path: data/processed/thampanoor_X_test.npy
+      hash: md5
+      md5: ca0f89e67872bda0a80002029b559099
+      size: 1970048
+    - path: data/processed/thampanoor_X_train.npy
+      hash: md5
+      md5: 7e6c65f803cc4f5940f4fcb33724bc7f
+      size: 7872896
+    - path: data/processed/thampanoor_y_test.npy
+      hash: md5
+      md5: 200e4cbfc02f4b43a18acf3922dd4d6b
+      size: 164288
+    - path: data/processed/thampanoor_y_train.npy
+      hash: md5
+      md5: 4eec0968465c89b47c966e6284aa7bd9
+      size: 656192
+    - path: models/technopark_scaler.pkl
+      hash: md5
+      md5: d96206f658d7bca5afc6baa1639772b0
+      size: 901
+    - path: models/thampanoor_scaler.pkl
+      hash: md5
+      md5: 31ce6eedf7b1cc6b6ed0ed180cfae4a7
+      size: 901
+  train:
+    cmd: python src/train.py
+    deps:
+    - path: data/processed
+      hash: md5
+      md5: fed540a52162186c6f22d2945226a5f6.dir
+      size: 21326848
+      nfiles: 8
+    - path: params.yaml
+      hash: md5
+      md5: 6b80109eb196d98d696bfa2780a7d4f1
+      size: 315
+    - path: src/train.py
+      hash: md5
+      md5: eeb16c7dbf10652d4bc7c0e2e0b608e1
+      size: 2822
+    params:
+      params.yaml:
+        train:
+          lstm_units: 64
+          dropout: 0.2
+          epochs: 30
+          patience: 5
+          batch_size: 32
+          learning_rate: 0.001
+    outs:
+    - path: metrics.json
+      hash: md5
+      md5: 2b92a47d42075d3184c08fc8d43f9b39
+      size: 180
+    - path: models/technopark_model.keras
+      hash: md5
+      md5: 737ea616ff3dc1c3752a875e3675032c
+      size: 263201
+    - path: models/thampanoor_model.keras
+      hash: md5
+      md5: ae96d7ad1d30d1d96977c283815cfa21
+      size: 263211
