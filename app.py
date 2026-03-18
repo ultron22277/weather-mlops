@@ -1,6 +1,6 @@
 import streamlit as st
 import json, pickle, numpy as np, pandas as pd, requests, plotly.graph_objects as go
-from tensorflow import keras
+import keras
 from datetime import datetime, timedelta
 
 st.set_page_config(page_title="Weather Forecast — TVM", page_icon="🌤", layout="wide")
