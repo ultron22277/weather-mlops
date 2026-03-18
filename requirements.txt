@@ -1,8 +1,8 @@
-keras
-numpy
 streamlit
 plotly
 scikit-learn
 pandas
 requests
+numpy
 dvc
+joblib

@@ -25,5 +25,5 @@ stages:
     cmd: python src/train.py
     deps: [src/train.py, data/processed, params.yaml]
     params: [train]
-    outs: [models/technopark_model.keras, models/thampanoor_model.keras]
+    outs: [models/technopark_model.pkl, models/thampanoor_model.pkl]
     metrics: [metrics.json]

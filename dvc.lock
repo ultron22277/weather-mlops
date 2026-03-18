@@ -108,8 +108,8 @@ stages:
       size: 315
     - path: src/train.py
       hash: md5
-      md5: eeb16c7dbf10652d4bc7c0e2e0b608e1
-      size: 2822
+      md5: a8e3bc29221171bc936cc885f526c715
+      size: 2471
     params:
       params.yaml:
         train:
@@ -122,13 +122,13 @@ stages:
     outs:
     - path: metrics.json
       hash: md5
-      md5: 2b92a47d42075d3184c08fc8d43f9b39
-      size: 180
-    - path: models/technopark_model.keras
+      md5: b9aa2c56fe279103e2ea6622f2c47dbd
+      size: 181
+    - path: models/technopark_model.pkl
       hash: md5
-      md5: 737ea616ff3dc1c3752a875e3675032c
-      size: 263201
-    - path: models/thampanoor_model.keras
+      md5: 1a6c0540f1fad71ef67926ae5389f444
+      size: 3280116
+    - path: models/thampanoor_model.pkl
       hash: md5
-      md5: ae96d7ad1d30d1d96977c283815cfa21
-      size: 263211
+      md5: abd31b740fb5770ff2675fb268970366
+      size: 3236756

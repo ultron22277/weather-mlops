@@ -1,6 +1,6 @@
 import streamlit as st
 import json, pickle, numpy as np, pandas as pd, requests, plotly.graph_objects as go
-import keras
+import joblib
 from datetime import datetime, timedelta
 
 st.set_page_config(page_title="Weather Forecast — TVM", page_icon="🌤", layout="wide")
@@ -8,7 +8,7 @@ st.set_page_config(page_title="Weather Forecast — TVM", page_icon="🌤", layo
 
 @st.cache_resource
 def load_model(region):
-    return keras.models.load_model(f"models/{region}_model.keras")
+    return joblib.load(f"models/{region}_model.pkl")
 
 
 @st.cache_resource
@@ -49,8 +49,8 @@ def predict_next24(region, lat, lon):
         "dayofweek",
     ]
     scaled = scaler.transform(df[FEATURES].tail(48))
-    X = scaled[-48:].reshape(1, 48, len(FEATURES))
-    pred_scaled = model.predict(X, verbose=0)[0]
+    X = scaled[-48:].reshape(1, -1)
+    pred_scaled = model.predict(X)[0]
     dummy = np.zeros((24, scaler.n_features_in_))
     dummy[:, 0] = pred_scaled
     return scaler.inverse_transform(dummy)[:, 0], df
