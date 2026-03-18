@@ -1,0 +1,19 @@
+collect:
+  technopark_lat: 8.5574
+  technopark_lon: 76.8800
+  thampanoor_lat: 8.4875
+  thampanoor_lon: 76.9525
+  days_history: 180
+
+preprocess:
+  lookback: 48
+  horizon: 24
+  test_split: 0.2
+
+train:
+  lstm_units: 64
+  dropout: 0.2
+  epochs: 30
+  patience: 5
+  batch_size: 32
+  learning_rate: 0.001
